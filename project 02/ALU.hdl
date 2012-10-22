@@ -63,9 +63,12 @@ CHIP ALU {
     Mux16(a=fout, b=notfout, sel=no, out=realout);
     And16(a=realout, b=true, out=out);
 
-    Add16wc(a=realout, b=true, carry=zrc);
+    //Add16wc(a=realout, b=true, carry=zrc);
+    Or16wc(a=realout, out=zrc);
 
     Not(in=zrc, out=zr);
 
-    Add16wc(a=realout, b[8..15]=true, carry=ng);
+    //Add16wc(a=realout, b[8..15]=true, carry=ng);
+    And16(a=realout, b[8..15]=true, out=nga);
+    Or16wc(a=nga, out=ng);
 }
